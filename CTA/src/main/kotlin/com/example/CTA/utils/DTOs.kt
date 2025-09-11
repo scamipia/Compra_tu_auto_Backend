@@ -12,3 +12,9 @@ data class RegisterDTO(
     val role: String
 )
 
+data class AuthResponse(
+    val username: String,
+    val token: String,
+    val role: String
+)
+

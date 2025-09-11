@@ -1,6 +1,7 @@
 package com.example.CTA.controller
 
 import com.example.CTA.service.AuthService
+import com.example.CTA.utils.AuthResponse
 import com.example.CTA.utils.LoginDTO
 import com.example.CTA.utils.RegisterDTO
 import com.example.CTA.utils.UserBuilder
@@ -19,13 +20,13 @@ class AuthController {
     lateinit var authService: AuthService
 
     @PostMapping("/login")
-    fun login(@RequestBody loginDTO: LoginDTO): ResponseEntity<String> {
+    fun login(@RequestBody loginDTO: LoginDTO): ResponseEntity<AuthResponse> {
         val result = authService.login(loginDTO)
         return ResponseEntity.ok(result)
     }
 
     @PostMapping("/register")
-    fun register(@RequestBody @Valid registerDto: RegisterDTO): ResponseEntity<String> {
+    fun register(@RequestBody @Valid registerDto: RegisterDTO): ResponseEntity<AuthResponse> {
         val user = UserBuilder()
             .withName(registerDto.name)
             .withUsername(registerDto.username)

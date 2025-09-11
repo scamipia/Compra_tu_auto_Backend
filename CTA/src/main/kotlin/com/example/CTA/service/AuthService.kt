@@ -2,6 +2,7 @@ package com.example.CTA.service
 
 import com.example.CTA.model.User
 import com.example.CTA.repository.UserRepository
+import com.example.CTA.utils.AuthResponse
 import com.example.CTA.utils.LoginDTO
 import jakarta.transaction.Transactional
 import org.springframework.beans.factory.annotation.Autowired
@@ -24,13 +25,18 @@ class AuthService {
     lateinit var authenticationManager: AuthenticationManager
 
     @Transactional
-    fun register(user: User): String {
+    fun register(user: User): AuthResponse {
         user.passwordField = passwordEncoder.encode(user.password)
         userRepository.save(user)
-        return jwtService.generateToken(user)
+        val token = jwtService.generateToken(user)
+        return AuthResponse(
+            user.username.toString(),
+            token,
+            user.role.toString()
+        )
     }
 
-    fun login(loginDTO: LoginDTO): String {
+    fun login(loginDTO: LoginDTO): AuthResponse {
         try{
             authenticationManager.authenticate(
                 UsernamePasswordAuthenticationToken(
@@ -42,6 +48,11 @@ class AuthService {
             throw IllegalArgumentException("Credenciales inválidas")
         }
         val user: User = userRepository.findByUsernameField(loginDTO.username).get()
-        return jwtService.generateToken(user)
+        val token = jwtService.generateToken(user)
+        return AuthResponse(
+            user.username.toString(),
+            token,
+            user.role.toString()
+        )
     }
 }
