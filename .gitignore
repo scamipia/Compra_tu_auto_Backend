@@ -1,40 +1,35 @@
-HELP.md
-../.gradle
-../build/
-!../gradle/wrapper/gradle-wrapper.jar
-!**/src/main/**/build/
-!**/src/test/**/build/
+# Build / Gradle
+.gradle/
+build/
+!gradle/wrapper/gradle-wrapper.jar
+!gradle/wrapper/gradle-wrapper.properties
 
-### STS ###
-.apt_generated
-.classpath
-.factorypath
-.project
-.settings
-.springBeans
-.sts4-cache
-bin/
-!**/src/main/**/bin/
-!**/src/test/**/bin/
-
-### IntelliJ IDEA ###
+# IDEs
 .idea
 *.iws
 *.iml
 *.ipr
+.vscode/
+.settings/
+*.class
 out/
-!**/src/main/**/out/
-!**/src/test/**/out/
+bin/
 
-### NetBeans ###
+# STS
+.apt_generated
+.factorypath
+.springBeans
+.sts4-cache
+
+# NetBeans
 /nbproject/private/
 /nbbuild/
 /dist/
 /nbdist/
 /.nb-gradle/
 
-### VS Code ###
-.vscode/
-
-### Kotlin ###
+# Kotlin
 .kotlin
+
+# Otros
+HELP.md
