@@ -1,0 +1,32 @@
+name: Backend CI
+
+on:
+  push:
+    branches: [ "githubAction-test" ]
+  pull_request:
+    branches: [ "githubAction-test" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build & Test Backend
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'corretto'
+          java-version: '17'
+
+      - name: Grant Permissions to gradlew
+        run: chmod +x gradlew
+
+      - name: Build with Gradle
+        run: ./gradlew clean build
+
+      - name: Run tests with Gradle
+        run: ./gradlew clean test
