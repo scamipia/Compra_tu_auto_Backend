@@ -1,6 +1,6 @@
 package com.example.CTA.service
 
-import com.example.CTA.model.User
+import com.example.CTA.model.Account
 import io.jsonwebtoken.Claims
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.io.Decoders
@@ -15,13 +15,13 @@ import kotlin.text.substring
 class JwtService {
 
     val secret = "7bace0d50a22258fea65936973a3a4e139e6784c406e9192004169f037e98d15"
-    fun generateToken(user: User): String{
+    fun generateToken(account: Account): String{
         var token: String = Jwts
             .builder()
             //.subject(user.username)
-            .setSubject(user.usernameField)
-            .claim("role", user.role)
-            .claim("id", user.id)
+            .setSubject(account.usernameField)
+            .claim("role", account.role)
+            .claim("id", account.id)
             .setIssuedAt(Date(System.currentTimeMillis()))
             .setExpiration(Date(System.currentTimeMillis() + 24*60*60*1000))
             .signWith(getSigninKey())
