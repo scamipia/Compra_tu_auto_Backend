@@ -27,9 +27,17 @@ data class postPublishDTO(
 )
 
 data class PostResponseDTO(
+    val id: Long,
     val price: Float,
     val make: String,
     val model: String,
+    val dealerId: Long,
     val dealer: String,
     val image: String
+)
+
+data class DealerDTO(
+    val id: Long,
+    val name: String,
+    val posts: List<PostResponseDTO>
 )

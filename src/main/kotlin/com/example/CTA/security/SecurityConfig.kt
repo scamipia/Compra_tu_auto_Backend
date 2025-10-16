@@ -34,9 +34,9 @@ class SecurityConfig {
             .headers { header -> header.frameOptions { it.disable() }}
             .authorizeHttpRequests {
                 it.requestMatchers("/admin/**").hasAuthority("ADMIN")
-                it.requestMatchers("/dealer/**").hasAuthority("DEALER")
+                it.requestMatchers("/dealer/publish").hasAuthority("DEALER")
                 it.requestMatchers("/customer/**").hasAuthority("CUSTOMER")
-                it.requestMatchers("/login/**", "/register/**", "/search").permitAll() }
+                it.requestMatchers("/login/**", "/register/**", "/search", "/dealer/*", "/post/*").permitAll() }
             .authorizeHttpRequests { it.anyRequest().authenticated() }
 //            .authorizeHttpRequests { conf ->
 //                conf.requestMatchers("admin/**").hasAuthority("ADMIN")

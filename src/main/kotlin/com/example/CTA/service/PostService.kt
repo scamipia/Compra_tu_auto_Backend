@@ -31,9 +31,14 @@ class PostService(
         return postRepository.findAll(spec, pageable)
     }
 
+    fun getPostById(id: Long): Post =
+        postRepository.findById(id).orElseThrow { RuntimeException("Post no encontrado") }
+
     private fun <T> Specification<T>?.andIfNotNull(other: Specification<T>?): Specification<T>? {
         return if (other != null) {
             this?.and(other) ?: other
         } else this
     }
+
+
 }

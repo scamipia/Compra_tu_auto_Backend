@@ -2,13 +2,11 @@ package com.example.CTA.controller
 
 import com.example.CTA.service.DealerService
 import com.example.CTA.service.JwtService
+import com.example.CTA.utils.DealerDTO
 import com.example.CTA.utils.postPublishDTO
 import jakarta.servlet.http.HttpServletRequest
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/dealer")
@@ -29,4 +27,10 @@ class DealerController {
     private fun getAccountIdFromRequest(request: HttpServletRequest): Long {
         return jwtService.extractId(request.getHeader("Authorization")).toLong()
     }
+
+    @GetMapping("/{dealerId}")
+    fun getDealer(@PathVariable dealerId: Long): DealerDTO {
+        return dealerService.getDealer(dealerId)
+    }
+
 }

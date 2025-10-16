@@ -4,7 +4,7 @@ import com.example.CTA.model.Account
 import com.example.CTA.model.Car
 import com.example.CTA.model.Customer
 import com.example.CTA.model.Dealer
-import com.example.CTA.model.Opinion
+//import com.example.CTA.model.Opinion
 import com.example.CTA.model.Post
 import java.time.LocalDate
 
@@ -73,15 +73,15 @@ class PostBuilder {
     fun build(): Post = post
 }
 
-class OpinionBuilder {
-    private val opinion = Opinion()
-
-    fun id(id: Long) = apply { opinion.id = id }
-    fun comment(comment: String) = apply { opinion.comment = comment }
-    fun createdDate(createdDate: LocalDate) = apply { opinion.createdDate = createdDate }
-    fun rate(rate: Int) = apply { opinion.rate = rate }
-    fun customer(customer: Customer) = apply { opinion.customer = customer }
-    fun car(car: Car) = apply { opinion.car = car }
-
-    fun build(): Opinion = opinion
-}
+//class OpinionBuilder {
+//    private val opinion = Opinion()
+//
+//    fun id(id: Long) = apply { opinion.id = id }
+//    fun comment(comment: String) = apply { opinion.comment = comment }
+//    fun createdDate(createdDate: LocalDate) = apply { opinion.createdDate = createdDate }
+//    fun rate(rate: Int) = apply { opinion.rate = rate }
+//    fun customer(customer: Customer) = apply { opinion.customer = customer }
+//    fun car(car: Car) = apply { opinion.car = car }
+//
+//    fun build(): Opinion = opinion
+//}
