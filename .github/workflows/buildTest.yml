@@ -2,9 +2,13 @@ name: Backend CI
 
 on:
   push:
-    branches: [ "githubAction-test" ]
+    branches:
+      - "ft*"
+      - "dev*"
   pull_request:
-    branches: [ "githubAction-test" ]
+    branches:
+      - "ft*"
+      - "dev*"
   workflow_dispatch:
 
 jobs:
