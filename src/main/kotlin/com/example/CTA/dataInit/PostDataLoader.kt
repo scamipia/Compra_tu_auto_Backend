@@ -22,10 +22,15 @@ class PostDataLoader(
     fun initPosts() = CommandLineRunner {
 
         val cars = carRepository.findAll()
-        val dealers = dealerRepository.findAll()
+        if (cars.isEmpty()) {
+            println("⚠️ No se cargaron posts: faltan autos.")
+            return@CommandLineRunner
+        }
 
-        if (cars.isEmpty() || dealers.isEmpty()) {
-            println("⚠️ No se cargaron posts: faltan autos o concesionarias.")
+        // Buscar el dealer con user_id = 2
+        val dealer = dealerRepository.findById(2).orElse(null)
+        if (dealer == null) {
+            println("⚠️ No se encontró el dealer con user_id = 2")
             return@CommandLineRunner
         }
 
@@ -33,29 +38,30 @@ class PostDataLoader(
         val ford = cars.firstOrNull { it.make == "Ford" }
         val volkswagen = cars.firstOrNull { it.make == "Volkswagen" }
 
-        val dealer1 = dealers.getOrNull(0)
-        val dealer2 = dealers.getOrNull(1)
-        val dealer3 = dealers.getOrNull(2)
+        if (toyota == null || ford == null || volkswagen == null) {
+            println("⚠️ No se cargaron todos los posts: faltan algunos autos específicos.")
+            return@CommandLineRunner
+        }
 
         val post1 = Post().apply {
             price = 35000000f
             description = "Toyota Corolla 2020 — confiable, cómodo y eficiente. Ideal para ciudad y ruta."
             car = toyota
-            dealer = dealer1
+            this.dealer = dealer
         }
 
         val post2 = Post().apply {
             price = 42000000f
             description = "Ford Focus Titanium 2021 con caja automática, 4 puertas, interior premium y bajo consumo."
             car = ford
-            dealer = dealer1
+            this.dealer = dealer
         }
 
         val post3 = Post().apply {
             price = 48000000f
             description = "Volkswagen Golf TDI con motor diésel y 150 CV. Potente y con excelente rendimiento."
             car = volkswagen
-            dealer = dealer1
+            this.dealer = dealer
         }
 
         postRepository.saveAll(listOf(post1, post2, post3))

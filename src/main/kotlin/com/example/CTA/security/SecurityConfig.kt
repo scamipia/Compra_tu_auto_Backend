@@ -36,7 +36,7 @@ class SecurityConfig {
                 it.requestMatchers("/admin/**").hasAuthority("ADMIN")
                 it.requestMatchers("/dealer/publish").hasAuthority("DEALER")
                 it.requestMatchers("/customer/**").hasAuthority("CUSTOMER")
-                it.requestMatchers("/login/**", "/register/**", "/search", "/dealer/*", "/post/*","/v3/api-docs/**",
+                it.requestMatchers("/login/**", "/register/**", "/post/search", "/dealer/*", "/post/**","/v3/api-docs/**",
                     "/swagger-ui/**",
                     "/swagger-ui.html").permitAll() }
             .authorizeHttpRequests { it.anyRequest().authenticated() }
