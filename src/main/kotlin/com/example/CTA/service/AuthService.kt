@@ -1,12 +1,11 @@
 package com.example.CTA.service
 
-import com.example.CTA.model.User
-import com.example.CTA.repository.UserRepository
+import com.example.CTA.model.Account
+import com.example.CTA.repository.AccountRepository
 import com.example.CTA.utils.AuthResponse
 import com.example.CTA.utils.LoginDTO
 import jakarta.transaction.Transactional
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.crypto.password.PasswordEncoder
@@ -16,7 +15,7 @@ import org.springframework.stereotype.Service
 class AuthService {
 
     @Autowired
-    lateinit var userRepository: UserRepository
+    lateinit var accountRepository: AccountRepository
     @Autowired
     lateinit var passwordEncoder: PasswordEncoder
     @Autowired
@@ -25,15 +24,22 @@ class AuthService {
     lateinit var authenticationManager: AuthenticationManager
 
     @Transactional
-    fun register(user: User): AuthResponse {
-        user.passwordField = passwordEncoder.encode(user.password)
-        userRepository.save(user)
-        val token = jwtService.generateToken(user)
+    fun register(account: Account): AuthResponse {
+        account.passwordField = passwordEncoder.encode(account.password)
+        accountRepository.save(account)
+        val token = jwtService.generateToken(account)
         return AuthResponse(
-            user.username.toString(),
+            account.username.toString(),
             token,
-            user.role.toString()
+            account.role.toString()
         )
+    }
+
+    fun registerAll(users: List<Account>) {
+        users.forEach{ acc ->
+            acc.passwordField = passwordEncoder.encode(acc.passwordField)
+            accountRepository.save(acc)
+        }
     }
 
     fun login(loginDTO: LoginDTO): AuthResponse {
@@ -47,12 +53,12 @@ class AuthService {
         }catch (e: Exception){
             throw IllegalArgumentException("Credenciales inválidas")
         }
-        val user: User = userRepository.findByUsernameField(loginDTO.username).get()
-        val token = jwtService.generateToken(user)
+        val account: Account = accountRepository.findByUsernameField(loginDTO.username).get()
+        val token = jwtService.generateToken(account)
         return AuthResponse(
-            user.username.toString(),
+            account.username.toString(),
             token,
-            user.role.toString()
+            account.role.toString()
         )
     }
 }

@@ -5,12 +5,15 @@ import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
+import jakarta.persistence.Inheritance
+import jakarta.persistence.InheritanceType
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
 
 @Entity
-class User : UserDetails {
+@Inheritance(strategy = InheritanceType.JOINED)
+open class Account : UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

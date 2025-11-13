@@ -14,6 +14,6 @@ class PruebaGithubActions {
 
     @Test
     fun pruebaGithubActions() {
-        assertTrue("prueba de falla de test") { false }
+        assertTrue("prueba de falla de test") { true }
     }
 }

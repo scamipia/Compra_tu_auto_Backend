@@ -4,7 +4,7 @@ import com.example.CTA.service.AuthService
 import com.example.CTA.utils.AuthResponse
 import com.example.CTA.utils.LoginDTO
 import com.example.CTA.utils.RegisterDTO
-import com.example.CTA.utils.UserBuilder
+import com.example.CTA.utils.CustomerBuilder
 import jakarta.validation.Valid
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
@@ -27,11 +27,11 @@ class AuthController {
 
     @PostMapping("/register")
     fun register(@RequestBody @Valid registerDto: RegisterDTO): ResponseEntity<AuthResponse> {
-        val user = UserBuilder()
-            .withName(registerDto.name)
-            .withUsername(registerDto.username)
-            .withPassword(registerDto.password)
-            .withRole(registerDto.role)
+        val user = CustomerBuilder()
+            .name(registerDto.name)
+            .username(registerDto.username)
+            .password(registerDto.password)
+            .role(registerDto.role)
             .build()
         val result = authService.register(user)
         return ResponseEntity.ok(result)
