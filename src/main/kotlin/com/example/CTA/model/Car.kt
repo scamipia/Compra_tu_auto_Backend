@@ -34,5 +34,10 @@ class Car {
     @Column
     var horsepower: Int? = null
 
+    @Column
+    var year: Int? = null
+
+    @Column
+    var color: String? = null
 
 }

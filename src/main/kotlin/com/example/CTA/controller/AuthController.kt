@@ -36,14 +36,4 @@ class AuthController {
         val result = authService.register(user)
         return ResponseEntity.ok(result)
     }
-
-    @GetMapping("/admin")
-    fun testAdmin(): String {
-        return "Hola admin"
-    }
-
-    @GetMapping("/user")
-    fun testUser(): String {
-        return "Hola user"
-    }
 }
