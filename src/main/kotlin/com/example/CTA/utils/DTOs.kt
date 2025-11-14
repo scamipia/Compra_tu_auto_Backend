@@ -41,3 +41,16 @@ data class DealerDTO(
     val name: String,
     val posts: List<PostResponseDTO>
 )
+
+data class CarDTO(
+    val id: Long,
+    val make: String,
+    val model: String,
+    val image: String?,
+    val fuelType: String?,
+    val doors: Int?,
+    val transmission: String?,
+    val horsepower: Int?,
+    val year: Int?,
+    val color: String?
+)

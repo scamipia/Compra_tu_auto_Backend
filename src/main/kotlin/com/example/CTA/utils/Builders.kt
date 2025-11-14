@@ -56,7 +56,8 @@ class CarBuilder {
     fun doors(doors: Int?) = apply { car.doors = doors }
     fun transmission(transmission: String?) = apply { car.transmission = transmission }
     fun horsepower(horsepower: Int?) = apply { car.horsepower = horsepower }
-
+    fun year(year: Int) = apply { car.year = year }
+    fun color(color: String) = apply { car.color = color }
 
     fun build(): Car = car
 }
