@@ -5,12 +5,15 @@ import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
+import jakarta.persistence.Table
 
 @Entity
+@Table(name = "car_table")
 class Car {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name ="car_id")
     var id:Long? = null
 
     @Column(nullable = false)
@@ -34,7 +37,7 @@ class Car {
     @Column
     var horsepower: Int? = null
 
-    @Column
+    @Column(name = "manufacture_year")
     var year: Int? = null
 
     @Column
