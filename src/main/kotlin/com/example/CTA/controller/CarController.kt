@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.*
 class CarController(
     private val carService: CarService
 ) {
-
     @GetMapping("/all")
     fun getAllCars(): ResponseEntity<List<CarDTO>> {
         val cars = carService.getAllCars()
